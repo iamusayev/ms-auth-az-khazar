@@ -23,3 +23,5 @@ databaseChangeLog:
                   type: VARCHAR(128)
                   constraints:
                     nullable: false
+
+
