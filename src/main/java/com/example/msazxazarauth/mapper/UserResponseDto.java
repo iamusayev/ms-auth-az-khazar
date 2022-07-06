@@ -1,4 +1,4 @@
-package com.example.msazxazarauth.model.dto;
+package com.example.msazxazarauth.mapper;
 
 import liquibase.pro.packaged.B;
 import lombok.*;
@@ -8,6 +8,6 @@ import lombok.*;
 @Builder
 public class UserResponseDto {
 
-    private String name;
+    private String username;
 
 }
