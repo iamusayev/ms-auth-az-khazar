@@ -22,11 +22,10 @@ public class RoleService {
 
     private final RoleRepository roleRepository;
 
-
     public void saveRole(CreateRoleDto roleDto) {
         log.info("ActionLog.saveRole.start");
 
-        var roleEntity = RoleMapper.mapCreateDtoToEntity(roleDto);
+        var roleEntity = RoleMapper.getInstance().mapCreateDtoToEntity(roleDto);
         roleRepository.save(roleEntity);
 
         log.info("ActionLog.saveRole.end");
@@ -76,7 +75,7 @@ public class RoleService {
 
 
         return PageableRateDto.builder()
-                .rates(RoleMapper.mapEntitiesToListResponseDtos(roles))
+                .rates(RoleMapper.getInstance().mapEntitiesToListResponseDtos(roles))
                 .lastPageNumber(ratePageCounts)
                 .hasNextPage(rolePage.hasNext())
                 .build();
