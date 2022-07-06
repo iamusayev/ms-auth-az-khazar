@@ -52,7 +52,7 @@ public class UserService implements UserDetailsService {
     public void saveUser(CreateUserDto userDto) {
         log.info("ActionLog.saveUser.start");
 
-        var userEntity = UserMapper.mapCreateDtoToEntity(userDto);
+        var userEntity = UserMapper.getInstance().mapCreateDtoToEntity(userDto);
         userRepository.save(userEntity);
 
         log.info("ActionLog.saveUser.end");
@@ -92,7 +92,7 @@ public class UserService implements UserDetailsService {
 
 
         return PageableUserDto.builder()
-                .users(UserMapper.mapEntitiesToListResponseDto(roles))
+                .users(UserMapper.getInstance().mapEntitiesToListResponseDto(roles))
                 .lastPageNumber(userPageCounts)
                 .hasNextPage(userPage.hasNext())
                 .build();
