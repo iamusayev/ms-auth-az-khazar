@@ -1,4 +1,4 @@
-package com.example.msazxazarauth.model.dto;
+package com.example.msazxazarauth.service;
 
 import com.example.msazxazarauth.dao.entity.RoleEntity;
 import lombok.Value;
