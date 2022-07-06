@@ -34,8 +34,8 @@ public class RoleSpecification implements Specification<RoleEntity> {
                         "%" + roleCriteria.getName() + "%"));
             }
             if (roleCriteria.getDescription() != null) {
-                predicates.add(criteriaBuilder.equal(root.get(DESCRIPTION),
-                        roleCriteria.getDescription()));
+                predicates.add(criteriaBuilder.like(root.get(DESCRIPTION),
+                        "%" + roleCriteria.getDescription() + "%"));
             }
         }
         return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
