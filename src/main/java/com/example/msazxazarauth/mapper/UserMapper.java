@@ -3,30 +3,26 @@ package com.example.msazxazarauth.mapper;
 
 import com.example.msazxazarauth.dao.entity.UserEntity;
 import com.example.msazxazarauth.service.CreateUserDto;
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class UserMapper {
+@Mapper
+public abstract class UserMapper {
+
+    private static final UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
+
+    public abstract UserEntity mapCreateDtoToEntity(CreateUserDto userDto);
+
+    public abstract UserResponseDto mapEntityToResponseDto(UserEntity userEntity);
+
+    public abstract List<UserResponseDto> mapEntitiesToListResponseDto(List<UserEntity> userEntities);
 
 
-    public static UserEntity mapCreateDtoToEntity(CreateUserDto userDto) {
-        return UserEntity.builder()
-                .username(userDto.getName())
-                .password(userDto.getPassword())
-                .build();
+    public static UserMapper getInstance() {
+        return INSTANCE;
     }
-
-    public static UserResponseDto mapEntityToResponseDto(UserEntity userEntity) {
-        return UserResponseDto.builder()
-                .name(userEntity.getUsername())
-                .build();
-    }
-
-    public static List<UserResponseDto> mapEntitiesToListResponseDto(List<UserEntity> userEntities) {
-        return userEntities.stream()
-                .map(UserMapper::mapEntityToResponseDto)
-                .collect(Collectors.toList());
-    }
-
 }
+
+
