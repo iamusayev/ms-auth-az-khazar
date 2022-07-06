@@ -1,4 +1,4 @@
-package com.example.msazxazarauth.model.dto;
+package com.example.msazxazarauth.mapper;
 
 
 import lombok.AllArgsConstructor;
