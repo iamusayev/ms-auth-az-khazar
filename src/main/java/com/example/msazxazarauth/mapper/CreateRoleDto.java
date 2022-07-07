@@ -1,6 +1,5 @@
 package com.example.msazxazarauth.mapper;
 
-import lombok.NonNull;
 import lombok.Value;
 
 import javax.validation.constraints.NotEmpty;
@@ -12,6 +11,7 @@ public class CreateRoleDto {
 
     @NotNull
     @NotEmpty
+    @Size(min = 4, max = 10)
     String name;
 
     @NotEmpty
@@ -24,7 +24,7 @@ public class CreateRoleDto {
 
     @NotEmpty
     @NotNull
-    @Size(max = 16, min = 2)
+    @Size(min = 2, max = 16)
     String isStatic;
 
 }
