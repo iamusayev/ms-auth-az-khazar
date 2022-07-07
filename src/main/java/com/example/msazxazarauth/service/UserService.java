@@ -2,6 +2,7 @@ package com.example.msazxazarauth.service;
 
 import com.example.msazxazarauth.dao.entity.UserEntity;
 import com.example.msazxazarauth.dao.repository.UserRepository;
+import com.example.msazxazarauth.controller.handler.NotFoundException;
 import com.example.msazxazarauth.mapper.UserMapper;
 import com.example.msazxazarauth.model.criteria.PageCriteria;
 import com.example.msazxazarauth.model.criteria.UserCriteria;
@@ -20,6 +21,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import static com.example.msazxazarauth.model.constants.ExceptionConstants.*;
 
 
 @Service
@@ -53,6 +56,7 @@ public class UserService implements UserDetailsService {
         log.info("ActionLog.saveUser.start");
 
         var userEntity = UserMapper.getInstance().mapCreateDtoToEntity(userDto);
+        userEntity.setPassword(passwordEncoder.encode(userDto.getPassword()));
         userRepository.save(userEntity);
 
         log.info("ActionLog.saveUser.end");
@@ -101,9 +105,11 @@ public class UserService implements UserDetailsService {
     }
 
 
-    //TODO NOT FOUND EXCEPTION
     private UserEntity fetchUserIfExist(Long id) {
-        return userRepository.findById(id).orElseThrow();
+        return userRepository.findById(id).orElseThrow(() -> {
+            log.error("ActionLog.error.fetchUserIfExist id: {}", id);
+            throw new NotFoundException(String.format(NOT_FOUND_EXCEPTION_MESSAGE, "User", id), NOT_FOUND_EXCEPTION_CODE);
+        });
     }
 
 
