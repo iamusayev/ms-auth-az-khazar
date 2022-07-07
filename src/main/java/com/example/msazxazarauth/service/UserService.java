@@ -60,7 +60,6 @@ public class UserService implements UserDetailsService {
         userRepository.save(userEntity);
 
         log.info("ActionLog.saveUser.end");
-
     }
 
 
