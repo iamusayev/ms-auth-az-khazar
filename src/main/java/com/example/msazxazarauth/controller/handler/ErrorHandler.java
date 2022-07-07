@@ -1,5 +1,6 @@
 package com.example.msazxazarauth.controller.handler;
 
+import com.example.msazxazarauth.exception.UserAlreadyExistException;
 import com.example.msazxazarauth.model.dto.ExceptionDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,14 @@ public class ErrorHandler {
     public ExceptionDto handle(NotFoundException ex) {
         log.error("Exception", ex);
         return new ExceptionDto(ex.getCode(), ex.getMessage());
+    }
+
+
+    @ExceptionHandler(UserAlreadyExistException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ExceptionDto handle(UserAlreadyExistException ex){
+        log.error("Exception", ex);
+        return new ExceptionDto(ex.getCode(),ex.getMessage());
     }
 
 
