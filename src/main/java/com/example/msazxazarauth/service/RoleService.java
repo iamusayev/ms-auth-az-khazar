@@ -1,5 +1,6 @@
 package com.example.msazxazarauth.service;
 
+import com.example.msazxazarauth.controller.handler.NotFoundException;
 import com.example.msazxazarauth.dao.entity.RoleEntity;
 import com.example.msazxazarauth.dao.repository.RoleRepository;
 import com.example.msazxazarauth.mapper.CreateRoleDto;
@@ -14,6 +15,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+import static com.example.msazxazarauth.model.constants.ExceptionConstants.NOT_FOUND_EXCEPTION_CODE;
+import static com.example.msazxazarauth.model.constants.ExceptionConstants.NOT_FOUND_EXCEPTION_MESSAGE;
 
 @Service
 @RequiredArgsConstructor
@@ -31,12 +35,14 @@ public class RoleService {
         log.info("ActionLog.saveRole.end");
     }
 
-    public void updateRole(Long id, String name, String description) {
+    public void updateRole(Long id, CreateRoleDto roleDto) {
         log.info("ActionLog.updateRole.start id: {}", id);
 
         var roleEntity = fetchRoleIfExist(id);
-        roleEntity.setName(name);
-        roleEntity.setDescription(description);
+        roleEntity.setName(roleDto.getName());
+        roleEntity.setDescription(roleDto.getDescription());
+        roleEntity.setDistinguishedName(roleDto.getDistinguishedName());
+        roleEntity.setIsStatic(roleDto.getIsStatic());
         roleRepository.save(roleEntity);
 
         log.info("ActionLog.updateRole.end id: {}", id);
@@ -48,10 +54,6 @@ public class RoleService {
         roleRepository.deleteById(id);
 
         log.info("ActionLog.deleteRole.end id: {}", id);
-    }
-
-    private RoleEntity fetchRoleIfExist(Long id) {
-        return roleRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
 
@@ -79,6 +81,13 @@ public class RoleService {
                 .lastPageNumber(ratePageCounts)
                 .hasNextPage(rolePage.hasNext())
                 .build();
+    }
+
+    private RoleEntity fetchRoleIfExist(Long id) {
+        return roleRepository.findById(id).orElseThrow(() -> {
+            log.error("ActionLog.fetchRoleIfExist.error id: {}", id);
+            throw new NotFoundException(String.format(NOT_FOUND_EXCEPTION_MESSAGE, "Role", id), NOT_FOUND_EXCEPTION_CODE);
+        });
     }
 
 }
