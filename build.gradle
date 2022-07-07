@@ -25,12 +25,19 @@ dependencies {
 //    testImplementation 'org.codehaus.groovy:groovy-all:3.0.10'
 //    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.6.6'
 
+    //Spring validation
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.6.6'
+
     annotationProcessor 'org.projectlombok:lombok'
     compileOnly 'org.projectlombok:lombok'
 
     implementation 'org.mapstruct:mapstruct:1.4.2.Final'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
 
+    //Swagger
+    implementation('io.springfox:springfox-swagger2:2.9.2')
+    implementation('io.springfox:springfox-swagger-ui:2.9.2')
 
 //    liquibase
     implementation group: 'org.liquibase', name: 'liquibase-core', version: '4.9.0'
