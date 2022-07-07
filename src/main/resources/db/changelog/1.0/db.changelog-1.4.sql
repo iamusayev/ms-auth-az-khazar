@@ -1,2 +1,2 @@
-INSERT INTO roles (name, distinguished_name, description)
-VALUES ('ADMIN', 'HR', 'some description')
+INSERT INTO roles (name, distinguished_name, description, is_static)
+VALUES ('ADMIN', 'HR', 'description', 'yes')
