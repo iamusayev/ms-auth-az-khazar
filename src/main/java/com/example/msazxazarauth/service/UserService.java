@@ -1,9 +1,11 @@
 package com.example.msazxazarauth.service;
 
+import com.example.msazxazarauth.controller.handler.NotFoundException;
 import com.example.msazxazarauth.dao.entity.UserEntity;
 import com.example.msazxazarauth.dao.repository.UserRepository;
-import com.example.msazxazarauth.controller.handler.NotFoundException;
+import com.example.msazxazarauth.exception.UserAlreadyExistException;
 import com.example.msazxazarauth.mapper.UserMapper;
+import com.example.msazxazarauth.model.constants.ExceptionConstants;
 import com.example.msazxazarauth.model.criteria.PageCriteria;
 import com.example.msazxazarauth.model.criteria.UserCriteria;
 import com.example.msazxazarauth.service.specification.UserSpecification;
@@ -21,8 +23,11 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import static com.example.msazxazarauth.model.constants.ExceptionConstants.*;
+import static com.example.msazxazarauth.model.constants.ExceptionConstants.NOT_FOUND_EXCEPTION_CODE;
+import static com.example.msazxazarauth.model.constants.ExceptionConstants.NOT_FOUND_EXCEPTION_MESSAGE;
 
 
 @Service
@@ -33,6 +38,32 @@ public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+
+
+    public void saveUser(CreateUserDto userDto) {
+        log.info("ActionLog.saveUser.start");
+
+        Optional<UserEntity> maybeUser = userRepository.findByUsername(userDto.getUsername());
+        if (maybeUser.isPresent()) {
+            throw new UserAlreadyExistException(USER_ALREADY_EXIST_MESSAGE, USER_ALREADY_EXIST_CODE);
+        }
+
+        var userEntity = UserMapper.getInstance().mapCreateDtoToEntity(userDto);
+        var encryptedPassword = passwordEncoder.encode(userEntity.getPassword());
+        userEntity.setPassword((encryptedPassword));
+        userRepository.save(userEntity);
+
+        log.info("ActionLog.saveUser.end");
+    }
+
+
+
+
+
+
+
+
+
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
@@ -50,16 +81,6 @@ public class UserService implements UserDetailsService {
             log.info("ActionLog.loadUserByUsername.success: username {} ", username);
             return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
         }
-    }
-
-    public void saveUser(CreateUserDto userDto) {
-        log.info("ActionLog.saveUser.start");
-
-        var userEntity = UserMapper.getInstance().mapCreateDtoToEntity(userDto);
-        userEntity.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        userRepository.save(userEntity);
-
-        log.info("ActionLog.saveUser.end");
     }
 
 
@@ -95,7 +116,7 @@ public class UserService implements UserDetailsService {
 
 
         return PageableUserDto.builder()
-                .users(UserMapper.getInstance().mapEntitiesToListResponseDto(roles))
+                .users(UserMapper.getInstance().mapEntitiesToListResponseDtos(roles))
                 .lastPageNumber(userPageCounts)
                 .hasNextPage(userPage.hasNext())
                 .build();
