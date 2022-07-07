@@ -1,9 +1,10 @@
 package com.example.msazxazarauth.model.constants;
 
 import lombok.Data;
+import lombok.Getter;
 
 
-@Data
+@Getter
 public class ExceptionConstants {
 
     public static final String UNEXPECTED_EXCEPTION_CODE = "UNEXPECTED_EXCEPTION";
@@ -14,5 +15,8 @@ public class ExceptionConstants {
 
     public static final String VALIDATION_EXCEPTION_CODE = "INVALID_MANDATORY_FIELD";
     public static final String VALIDATION_EXCEPTION_MESSAGE = "One or more required fields in the request are invalid";
+
+    public static final String USER_ALREADY_EXIST_CODE = "USER_ALREADY_EXIST";
+    public static final String USER_ALREADY_EXIST_MESSAGE = "This username is taken, please enter something else";
 
 }
