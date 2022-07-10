@@ -1,4 +1,4 @@
-package com.example.msazxazarauth.service;
+package com.example.msazxazarauth.model.dto;
 
 import com.example.msazxazarauth.mapper.CreateRoleDto;
 import lombok.Value;
