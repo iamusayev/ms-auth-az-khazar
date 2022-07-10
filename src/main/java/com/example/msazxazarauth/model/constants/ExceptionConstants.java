@@ -19,4 +19,8 @@ public class ExceptionConstants {
     public static final String USER_ALREADY_EXIST_CODE = "USER_ALREADY_EXIST";
     public static final String USER_ALREADY_EXIST_MESSAGE = "This username is taken, please enter something else";
 
+
+    public static final String FORBIDDEN_EXCEPTION_CODE = "FORBIDDEN_EXCEPTION";
+    public static final String FORBIDDEN_EXCEPTION_MESSAGE = "You do not have access to this page";
+
 }
