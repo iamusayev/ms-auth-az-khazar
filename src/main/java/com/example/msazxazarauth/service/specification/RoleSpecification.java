@@ -15,6 +15,7 @@ import java.util.List;
 public class RoleSpecification implements Specification<RoleEntity> {
 
 
+
     private static final String NAME = "name";
     private static final String DESCRIPTION = "description";
 
