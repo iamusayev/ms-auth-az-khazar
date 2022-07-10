@@ -37,6 +37,7 @@ import static com.example.msazxazarauth.model.constants.ExceptionConstants.NOT_F
 public class UserService  implements UserDetailsService{
 
 
+
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
