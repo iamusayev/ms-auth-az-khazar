@@ -1,15 +1,14 @@
-package com.example.msazxazarauth.service;
+package com.example.msazxazarauth.model.dto;
 
 import com.example.msazxazarauth.mapper.UserResponseDto;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 import java.util.List;
 
-@Data
+@Setter
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class PageableUserDto {
 
     private List<UserResponseDto> users;
