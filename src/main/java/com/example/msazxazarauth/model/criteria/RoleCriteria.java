@@ -8,6 +8,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class RoleCriteria {
 
+
     private String name;
     private String isStatic;
     private String description;
