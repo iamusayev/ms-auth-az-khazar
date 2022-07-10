@@ -1,9 +1,11 @@
 package com.example.msazxazarauth.controller.handler;
 
 import com.example.msazxazarauth.exception.UserAlreadyExistException;
+import com.example.msazxazarauth.model.constants.ExceptionConstants;
 import com.example.msazxazarauth.model.dto.ExceptionDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -43,6 +45,13 @@ public class ErrorHandler {
     public ExceptionDto handle(MethodArgumentNotValidException ex) {
         log.error("Exception ", ex);
         return new ExceptionDto(VALIDATION_EXCEPTION_CODE, VALIDATION_EXCEPTION_MESSAGE);
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ExceptionDto handle(AccessDeniedException ex){
+        log.error("Exception", ex);
+        return new ExceptionDto(FORBIDDEN_EXCEPTION_CODE, FORBIDDEN_EXCEPTION_MESSAGE);
     }
 
 }
