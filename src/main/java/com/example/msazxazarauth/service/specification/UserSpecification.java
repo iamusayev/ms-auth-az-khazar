@@ -15,6 +15,7 @@ import java.util.List;
 public class UserSpecification implements Specification {
 
 
+
     private UserCriteria userCriteria;
 
     private static final String USERNAME = "username";
