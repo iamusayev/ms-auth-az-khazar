@@ -2,8 +2,7 @@ package com.example.msazxazarauth.mapper;
 
 
 import com.example.msazxazarauth.dao.entity.UserEntity;
-import com.example.msazxazarauth.service.CreateUserDto;
-import lombok.Getter;
+import com.example.msazxazarauth.model.dto.CreateUserDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
