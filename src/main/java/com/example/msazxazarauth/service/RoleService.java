@@ -7,6 +7,7 @@ import com.example.msazxazarauth.mapper.CreateRoleDto;
 import com.example.msazxazarauth.mapper.RoleMapper;
 import com.example.msazxazarauth.model.criteria.PageCriteria;
 import com.example.msazxazarauth.model.criteria.RoleCriteria;
+import com.example.msazxazarauth.model.dto.PageableRateDto;
 import com.example.msazxazarauth.service.specification.RoleSpecification;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
