@@ -5,9 +5,10 @@ import com.example.msazxazarauth.dao.entity.UserEntity;
 import com.example.msazxazarauth.dao.repository.UserRepository;
 import com.example.msazxazarauth.exception.UserAlreadyExistException;
 import com.example.msazxazarauth.mapper.UserMapper;
-import com.example.msazxazarauth.model.constants.ExceptionConstants;
 import com.example.msazxazarauth.model.criteria.PageCriteria;
 import com.example.msazxazarauth.model.criteria.UserCriteria;
+import com.example.msazxazarauth.model.dto.CreateUserDto;
+import com.example.msazxazarauth.model.dto.PageableUserDto;
 import com.example.msazxazarauth.service.specification.UserSpecification;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,11 +34,45 @@ import static com.example.msazxazarauth.model.constants.ExceptionConstants.NOT_F
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class UserService implements UserDetailsService {
+public class UserService  implements UserDetailsService{
 
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+
+
+    public void updateUserPassword(Long id, String password) {
+        log.info("ActionLog.updateUserPassword.start id :{}", id);
+
+        var userEntity = fetchUserIfExist(id);
+        var encryptedPassword = passwordEncoder.encode(password);
+        userEntity.setPassword(encryptedPassword);
+        userRepository.save(userEntity);
+
+        log.info("ActionLog.updateUserPassword.end id :{}", id);
+    }
+
+
+
+            private UserEntity fetchUserIfExist(Long id) {
+                return userRepository.findById(id).orElseThrow(() -> {
+                    log.error("ActionLog.error.fetchUserIfExist id: {}", id);
+                    throw new NotFoundException(String.format(NOT_FOUND_EXCEPTION_MESSAGE, "User", id), NOT_FOUND_EXCEPTION_CODE);
+                });
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     public void saveUser(CreateUserDto userDto) {
@@ -84,16 +119,7 @@ public class UserService implements UserDetailsService {
     }
 
 
-    public void updateUserPassword(Long id, String password) {
-        log.info("ActionLog.updateUserPassword.start id :{}", id);
 
-        var encryptedPassword = passwordEncoder.encode(password);
-        var userEntity = fetchUserIfExist(id);
-        userEntity.setPassword(encryptedPassword);
-        userRepository.save(userEntity);
-
-        log.info("ActionLog.updateUserPassword.end id :{}", id);
-    }
 
 
     public PageableUserDto getUsers(UserCriteria userCriteria, PageCriteria pageCriteria) {
@@ -109,28 +135,19 @@ public class UserService implements UserDetailsService {
 
         int userPageCounts = userPage.getTotalPages();
 
-
         if (userPageCounts != 0) {
             userPageCounts -= 1;
         }
-
 
         return PageableUserDto.builder()
                 .users(UserMapper.getInstance().mapEntitiesToListResponseDtos(roles))
                 .lastPageNumber(userPageCounts)
                 .hasNextPage(userPage.hasNext())
                 .build();
-
-
     }
 
 
-    private UserEntity fetchUserIfExist(Long id) {
-        return userRepository.findById(id).orElseThrow(() -> {
-            log.error("ActionLog.error.fetchUserIfExist id: {}", id);
-            throw new NotFoundException(String.format(NOT_FOUND_EXCEPTION_MESSAGE, "User", id), NOT_FOUND_EXCEPTION_CODE);
-        });
-    }
+
 
 
 }
