@@ -6,7 +6,6 @@ public class ForbiddenException extends AccessDeniedException {
 
     private final String code;
 
-
     public ForbiddenException(String msg, String code) {
         super(msg);
         this.code = code;
