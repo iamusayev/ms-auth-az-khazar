@@ -14,6 +14,7 @@ import java.util.HashMap;
 
 public class SimpleAccessDeniedHandler implements AccessDeniedHandler {
 
+
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
 
