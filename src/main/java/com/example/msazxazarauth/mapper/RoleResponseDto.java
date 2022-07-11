@@ -14,5 +14,4 @@ public class RoleResponseDto {
     private String isStatic;
     private String description;
 
-
 }
