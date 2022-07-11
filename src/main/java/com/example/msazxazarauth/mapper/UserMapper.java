@@ -11,6 +11,7 @@ import java.util.List;
 @Mapper
 public abstract class UserMapper {
 
+
     private static final UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
     public abstract UserEntity mapCreateDtoToEntity(CreateUserDto userDto);
