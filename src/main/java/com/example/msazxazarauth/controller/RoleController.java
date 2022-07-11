@@ -19,7 +19,6 @@ public class RoleController {
 
     private final RoleService roleService;
 
-
     @PutMapping("/{id}")
     public void updateRole(@PathVariable Long id, @RequestBody @Valid CreateRoleDto roleDto) {
         roleService.updateRole(id, roleDto);
