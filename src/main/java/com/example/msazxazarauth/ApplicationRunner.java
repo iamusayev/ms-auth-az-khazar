@@ -16,7 +16,6 @@ public class ApplicationRunner implements CommandLineRunner {
         SpringApplication.run(ApplicationRunner.class, args);
     }
 
-
     @Autowired
     private UserRepository userRepository;
 
