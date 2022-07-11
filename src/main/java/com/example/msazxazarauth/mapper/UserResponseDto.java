@@ -10,5 +10,4 @@ public class UserResponseDto {
 
     private String username;
 
-
 }
