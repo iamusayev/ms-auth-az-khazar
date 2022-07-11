@@ -32,14 +32,6 @@ public class UserController {
 
 
 
-
-
-
-
-
-
-
-
     @PatchMapping("/{id}")
     public void updateUserPassword(@PathVariable Long id, @RequestParam String password) {
         userService.updateUserPassword(id, password);
