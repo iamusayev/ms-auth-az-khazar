@@ -20,7 +20,6 @@ import static javax.persistence.GenerationType.AUTO;
 @NoArgsConstructor
 public class UserEntity {
 
-
     @Id
     @GeneratedValue(strategy = AUTO)
     private Long id;
