@@ -25,7 +25,6 @@ import static com.example.msazxazarauth.model.constants.ExceptionConstants.NOT_F
 @Slf4j
 public class RoleService {
 
-
     private final RoleRepository roleRepository;
 
     public void saveRole(CreateRoleDto roleDto) {
