@@ -9,6 +9,7 @@ import javax.validation.constraints.Size;
 @Value
 public class CreateRoleDto {
 
+
     @NotNull
     @NotEmpty
     @Size(min = 4, max = 10)
