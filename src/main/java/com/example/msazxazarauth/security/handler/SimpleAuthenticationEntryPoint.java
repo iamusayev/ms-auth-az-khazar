@@ -14,6 +14,7 @@ import java.util.HashMap;
 
 public class SimpleAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
+
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
 
