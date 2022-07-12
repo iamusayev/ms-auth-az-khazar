@@ -10,6 +10,7 @@ import lombok.Data;
 @Builder
 public class RoleResponseDto {
 
+
     private String name;
     private String isStatic;
     private String description;
