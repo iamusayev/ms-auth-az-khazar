@@ -11,7 +11,6 @@ import java.util.List;
 @NoArgsConstructor
 public class PageableUserDto {
 
-
     private List<UserResponseDto> users;
     private int lastPageNumber;
     private boolean hasNextPage;
