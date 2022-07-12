@@ -12,8 +12,6 @@ import java.util.List;
 @AllArgsConstructor
 public class PageableRateDto <T>{
 
-
-
     private List<RoleResponseDto> rates;
     private int lastPageNumber;
     private boolean hasNextPage;
