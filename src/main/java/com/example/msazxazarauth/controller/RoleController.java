@@ -17,7 +17,6 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class RoleController {
 
-
     private final RoleService roleService;
 
     @PutMapping("/{id}")
