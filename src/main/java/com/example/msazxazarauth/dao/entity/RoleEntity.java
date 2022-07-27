@@ -20,7 +20,6 @@ import static javax.persistence.GenerationType.AUTO;
 @AllArgsConstructor
 public class RoleEntity {
 
-
     @Id
     @GeneratedValue(strategy = AUTO)
     private Long id;
