@@ -11,7 +11,6 @@ import java.util.List;
 @Value
 public class CreateUserDto {
 
-
     @NotNull
     @Size(min = 6, max = 16)
     String username;
