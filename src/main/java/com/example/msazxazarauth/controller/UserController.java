@@ -19,16 +19,12 @@ public class UserController {
 
     private final UserService userService;
 
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasAnyAuthority('ADMIN')")
     public void save(@RequestBody @Valid CreateUserDto dto) {
         userService.saveUser(dto);
     }
-
-
-
 
 
     @PatchMapping("/{id}")
