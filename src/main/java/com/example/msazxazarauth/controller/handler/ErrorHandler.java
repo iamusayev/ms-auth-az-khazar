@@ -17,7 +17,6 @@ import static com.example.msazxazarauth.model.constants.ExceptionConstants.*;
 @Slf4j
 public class ErrorHandler {
 
-
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ExceptionDto handle(Exception ex) {
