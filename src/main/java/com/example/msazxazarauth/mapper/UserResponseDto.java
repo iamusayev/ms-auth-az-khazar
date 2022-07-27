@@ -8,7 +8,6 @@ import lombok.*;
 @Builder
 public class UserResponseDto {
 
-
     private String username;
 
 }
