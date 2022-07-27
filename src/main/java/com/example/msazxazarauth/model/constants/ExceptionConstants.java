@@ -7,7 +7,6 @@ import lombok.Getter;
 @Getter
 public class ExceptionConstants {
 
-
     public static final String UNEXPECTED_EXCEPTION_CODE = "UNEXPECTED_EXCEPTION";
     public static final String UNEXPECTED_EXCEPTION_MESSAGE = "Unexpected exception occurred";
 
