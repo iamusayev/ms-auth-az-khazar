@@ -34,15 +34,6 @@ public class UserController {
     }
 
 
-
-
-
-
-
-
-
-
-
     @GetMapping
     public PageableUserDto getUsers(UserCriteria userCriteria, PageCriteria pageCriteria) {
         return userService.getUsers(userCriteria, pageCriteria);
